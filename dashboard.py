@@ -1,6 +1,8 @@
 import tkinter as tk
+import studentEntry as s
 def onClick1() :
-    import studentEntry
+    objs = s.studententry
+    objs.ui(s.studententry)
 def onClick2() :
     import bookEntry
 def onClick3() :
