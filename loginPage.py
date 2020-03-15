@@ -22,7 +22,7 @@ class loginpage :
         Entry1.grid(row=0, column=1)
         lable2 = tk.Label(m, text="Password ")
         lable2.grid(row=1, column=0)
-        Entry2 = tk.Entry(m, width="15")
+        Entry2 = tk.Entry(m, width="15", show=' ')
         Entry2.grid(row=1, column=1)
         button1 = tk.Button(m, text="Login", command=lambda: loginpage.onClick(loginpage, Entry1, Entry2, m, lable3), width="10", height="1")
         button1.grid(column=1, row=2)
