@@ -1,7 +1,7 @@
 import tkinter as tk
 import DATABASE
 db = DATABASE.Database_connect
-db.Database_Connection('nikhil', '123')
+db.Database_Connection('', '')
 m = tk.Tk()
 m.title("Login Page")
 lable1 = tk.Label(m, text="username ")
