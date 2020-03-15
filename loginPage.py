@@ -1,8 +1,10 @@
 import tkinter as tk
 m = tk.Tk()
 m.title("Login Page")
-text1 = tk.Text(m, width="10", height="2")
-text1.pack()
+lable1 = tk.Label(m, text="username ")
+lable1.grid(row=0, column=0)
+text1 = tk.Text(m, width="15", height="1")
+text1.grid(row=0, column=1)
 button1 = tk.Button(m, text="Login", command=m.destroy, width="10", height="1")
-button1.pack()
+button1.grid(column=1, row=1)
 m.mainloop()
