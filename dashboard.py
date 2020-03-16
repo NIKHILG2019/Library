@@ -1,5 +1,6 @@
 import tkinter as tk
 import studentEntry as s
+import bookEntry as b
 
 
 class dashboard:
@@ -10,8 +11,11 @@ class dashboard:
         objd = dashboard
         objd.ui(dashboard)
 
-    def onClick2(self):
-        import bookEntry
+    def onClick2(self, d):
+        d.destroy()
+        b.bookentry.ui(b.bookentry)
+        objd = dashboard
+        objd.ui(dashboard)
 
     def onClick3 ( self ) :
         import bookIssue
@@ -29,7 +33,7 @@ class dashboard:
         button1 = tk.Button(d, width="10", height="1", text="Student Entry",
                             command=lambda: dashboard.onClick1(self, d))
         button1.grid(row=1, column=0)
-        button2 = tk.Button(d, width="10", height="1", text="Book Entry", command=lambda: dashboard.onClick2(self))
+        button2 = tk.Button(d, width="10", height="1", text="Book Entry", command=lambda: dashboard.onClick2(self, d))
         button2.grid(row=1, column=1)
         button3 = tk.Button(d, width="10", height="1", text="Book issue", command=lambda: dashboard.onClick3(self))
         button3.grid(row=1, column=2)
