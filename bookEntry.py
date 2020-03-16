@@ -2,18 +2,21 @@ import globalVar
 import tkinter as tk
 class bookentry :
     def onclick ( self, Entry1, Entry2, be, lable3 ) :
-        Quantity = Entry1.get()
-        bookName = Entry2.get()
-        c = globalVar.db1.cursor()
-        sql = "INSERT INTO BOOKS (bookName,Quantity) VALUES(%s,%s)"
-        val = (bookName, Quantity)
-        try :
-            c.execute(sql, val)
-            globalVar.db1.commit()
-            be.destroy()
-        except :
-            print("Error in Inserting.")
-            lable3.configure(text="Error occured in Inserting.")
+        if Entry1.get()=='' or Entry2.get()=='':
+            lable3.configure(text="No Entry can be left blank.")
+        else :
+            Quantity = Entry1.get()
+            bookName = Entry2.get()
+            c = globalVar.db1.cursor()
+            sql = "INSERT INTO BOOKS (bookName,Quantity) VALUES(%s,%s)"
+            val = (bookName, Quantity)
+            try :
+                c.execute(sql, val)
+                globalVar.db1.commit()
+                be.destroy()
+            except :
+                print("Error in Inserting.")
+                lable3.configure(text="Error occured in Inserting.")
 
     def ui ( self ) :
         be = tk.Tk()
