@@ -1,14 +1,18 @@
 import tkinter as tk
+import globalVar
 import dashboard
 import mysql.connector
 class loginpage :
     def onClick(self, Entry1, Entry2, m,lable3):
         username = Entry1.get()
+        globalVar.uname1 = username
         password = Entry2.get()
+        globalVar.passwd1 = password
         try:
             db = mysql.connector.connect(host="localhost", user=username, passwd=password, database="LIBRARY")
             if db.is_connected() :
                 m.destroy()
+                db.close()
                 objd = dashboard
                 objd.dashboard.ui(dashboard)
         except:
