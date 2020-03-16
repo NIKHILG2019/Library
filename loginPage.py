@@ -1,24 +1,22 @@
 import tkinter as tk
+import mysql.connector
 import globalVar
 import dashboard
-import mysql.connector
 class loginpage :
     def onClick(self, Entry1, Entry2, m,lable3):
         username = Entry1.get()
-        globalVar.uname1 = username
         password = Entry2.get()
-        globalVar.passwd1 = password
         try:
-            db = mysql.connector.connect(host="localhost", user=username, passwd=password, database="LIBRARY")
-            if db.is_connected() :
-                m.destroy()
-                db.close()
-                objd = dashboard
-                objd.dashboard.ui(dashboard)
-        except:
-            lable3.configure(text="Not Connected with database")
+                globalVar.db1 = mysql.connector.connect(host="localhost", user=username, passwd=password, database="LIBRARY")
+                if globalVar.db1.is_connected():
+                    m.destroy()
+                    objd = dashboard
+                    objd.dashboard.ui(dashboard)
+        except :
+            lable3.configure(text="Invalid Username or Password")
     def ui(self):
         m = tk.Tk()
+        m.geometry('600x150+550+300')
         m.title("Login Page")
         lable1 = tk.Label(m, text="username ")
         lable1.grid(row=0, column=0)

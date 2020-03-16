@@ -1,24 +1,23 @@
 import tkinter as tk
-import mysql.connector
 import globalVar
-class studententry :
+class studententry:
     def onClick(self, id_no, name, se):
         id = id_no.get()
         name1 = name.get()
-        db1 = mysql.connector.connect(host="localhost", user=globalVar.uname1, passwd=globalVar.passwd1, database="LIBRARY")
-        c = db1.cursor()
+        c = globalVar.db1.cursor()
         sql = "INSERT INTO STUDENT (idNo, name) VALUES (%s, %s)"
         val = (id, name1)
         try:
             c.execute(sql, val)
-            db1.commit()
-            db1.close()
+            globalVar.db1.commit()
             se.destroy()
         except:
             print("Error in INSERTING")
+            print(c)
 
     def ui(self):
         se = tk.Tk()
+        se.geometry('300x150+550+300')
         Entry1 = tk.Entry(se, width="15")
         Entry1.grid(row=0, column=1)
         Entry2 = tk.Entry(se, width="15")
