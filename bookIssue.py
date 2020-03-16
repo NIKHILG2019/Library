@@ -51,22 +51,26 @@ class bookissue:
                 else :
                     row = resstud[0]
                     lable4.configure(text="Student ID : " + str(row[0]) + " \n" + "Student Name : " + row[1])
-            if len(resstud) != 0 and len(resbook) != 0 and resbook[0][2] != 0:
+            if len(resstud) != 0 and len(resbook) != 0:
                 rows = resstud[0]
                 rowb = resbook[0]
-                sql="INSERT INTO issue(bookId,idNo,issueDate) VALUES(%s,%s,current_Date())"
-                val=(rowb[0],rows[0],)
-                try :
-                    c = globalVar.db1.cursor()
-                    c.execute(sql, val)
-                    globalVar.db1.commit()
-                    sql="UPDATE books SET Quantity = %s WHERE books.bookId = %s"
-                    val=(str(int(rowb[2])-1), rowb[0])
-                    c.execute(sql, val)
-                    globalVar.db1.commit()
-                except :
-                    lable3.configure(text="Book Already issued")
+                if rowb[2]==0 :
+                    lable3.configure(text="Book out of stock ")
                     lable4.configure(text="")
+                else :
+                    sql="INSERT INTO issue(bookId,idNo,issueDate) VALUES(%s,%s,current_Date())"
+                    val=(rowb[0],rows[0],)
+                    try :
+                        c = globalVar.db1.cursor()
+                        c.execute(sql, val)
+                        globalVar.db1.commit()
+                        sql="UPDATE books SET Quantity = %s WHERE books.bookId = %s"
+                        val=(str(int(rowb[2])-1), rowb[0])
+                        c.execute(sql, val)
+                        globalVar.db1.commit()
+                    except :
+                        lable3.configure(text="Book Already issued")
+                        lable4.configure(text="")
     def ui ( self ) :
         bi = tk.Tk()
         bi.geometry('800x150+550+300')
