@@ -1,8 +1,11 @@
 import tkinter as tk
 import globalVar
 class bookreturn :
+    lable = []
     def onclick( self, Entry1, br, lable3, row1, column1):
         lable3.configure(text="")
+        for i in bookreturn.lable :
+            i.destroy()
         if Entry1.get() == '' or not Entry1.get().isdigit() :
             if Entry1.get()=='':
                 lable3.configure(text = "Entry cannot be empty .")
@@ -16,7 +19,6 @@ class bookreturn :
             c.execute(sql, val)
             res = c.fetchall()
             if len(res)!=0:
-                lable = []
                 ++column1
                 for i in res :
                     lable3.configure(text="")
@@ -24,7 +26,7 @@ class bookreturn :
                     row1 = row1+1
                     lablen = tk.Label(br, text="idNo : "+str(row[0])+" "+"Name : "+row[1]+" "+"bookId : "+str(row[2])+" "+"bookName : "+row[3]+" "+"IssueDate : "+str(row[4]))
                     lablen.grid(row=row1, column=column1)
-                    lable.append(lablen)
+                    bookreturn.lable.append(lablen)
                 lable4 = tk.Label(br, text="Enter bookId ")
                 lable4.grid(row=1, column=0)
                 Entry2 = tk.Entry(br, width="15")
