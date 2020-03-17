@@ -58,8 +58,8 @@ class bookissue:
                     lable3.configure(text="Book out of stock ")
                     lable4.configure(text="")
                 else :
-                    sql="INSERT INTO issue(bookId,idNo,issueDate) VALUES(%s,%s,current_Date())"
-                    val=(rowb[0],rows[0],)
+                    sql="INSERT INTO issue(bookId,idNo,issueDate,name,bookName) VALUES(%s,%s,current_Date(),%s,%s)"
+                    val=(rowb[0],rows[0],rows[1],rowb[1],)
                     try :
                         c = globalVar.db1.cursor()
                         c.execute(sql, val)
