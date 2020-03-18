@@ -3,6 +3,7 @@ import studentEntry as s
 import bookEntry as b
 import bookIssue as i
 import bookReturn as r
+import globalVar
 
 class dashboard:
     def onClick1(self, d):
@@ -32,14 +33,14 @@ class dashboard:
         objd.ui(dashboard)
 
     def onClick5(self, d):
+        globalVar.db1.close()
         d.destroy()
 
     def ui(self):
         d = tk.Tk()
         d.geometry('500x150+550+300')
         d.title("DashBoard")
-        button1 = tk.Button(d, width="10", height="1", text="Student Entry",
-                            command=lambda: dashboard.onClick1(self, d))
+        button1 = tk.Button(d, width="10", height="1", text="Student Entry",command=lambda: dashboard.onClick1(self, d))
         button1.grid(row=1, column=0)
         button2 = tk.Button(d, width="10", height="1", text="Book Entry", command=lambda: dashboard.onClick2(self, d))
         button2.grid(row=1, column=1)

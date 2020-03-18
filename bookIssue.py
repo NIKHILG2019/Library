@@ -78,7 +78,7 @@ class bookissue:
         Entry1.grid(row=0, column=1)
         Entry2 = tk.Entry(bi, width="15")
         Entry2.grid(row=1, column=1)
-        bi.title("Book Entry")
+        bi.title("Book Issue")
         lable2 = tk.Label(bi, text="Student Name or Id")
         lable2.grid(row=1, column=0)
         lable1 = tk.Label(bi, text="Book Name or Id")

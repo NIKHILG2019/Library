@@ -90,7 +90,7 @@ class bookreturn :
         br.geometry('1000x350+350+300')
         Entry1 = tk.Entry(br, width="15")
         Entry1.grid(row=0, column=1)
-        br.title("Book Entry")
+        br.title("Book Return")
         lable1 = tk.Label(br, text="Student Id")
         lable1.grid(row=0, column=0)
         button1 = tk.Button(br, text="Search Student", command=lambda : bookreturn.onclick(bookreturn, Entry1, br, lable3, 0, 4), width="15", height="1")
