@@ -1,5 +1,6 @@
 import globalVar
 import tkinter as tk
+import mysql.connector
 class bookentry :
     def onclick ( self, Entry1, Entry2, be, lable3 ) :
         if Entry1.get()=='' or Entry2.get()=='':
@@ -7,12 +8,14 @@ class bookentry :
         else :
             Quantity = Entry1.get()
             bookName = Entry2.get()
+            globalVar.db1 = mysql.connector.connect(host="localhost", user=globalVar.username,passwd=globalVar.password, database="LIBRARY")
             c = globalVar.db1.cursor()
             sql = "INSERT INTO BOOKS (bookName,Quantity) VALUES(%s,%s)"
             val = (bookName, Quantity)
             try :
                 c.execute(sql, val)
                 globalVar.db1.commit()
+                globalVar.db1.close()
                 be.destroy()
             except :
                 print("Error in Inserting.")
@@ -30,9 +33,7 @@ class bookentry :
         lable2.grid(row=1, column=0)
         lable1 = tk.Label(be, text="Quantity")
         lable1.grid(row=0, column=0)
-        button1 = tk.Button(be, text="Save", command=lambda : bookentry.onclick(bookentry, Entry1, Entry2, be, lable3),
-                            width="10",
-                            height="1")
+        button1 = tk.Button(be, text="Save", command=lambda : bookentry.onclick(bookentry, Entry1, Entry2, be, lable3),width="10",height="1")
         button1.grid(column=0, row=2)
         lable3 = tk.Label(be, text="")
         lable3.grid(row=4, column=2)

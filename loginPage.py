@@ -8,11 +8,14 @@ class loginpage :
             lable3.configure(text="Username or Password cannot be empty")
         else:
             username = Entry1.get()
+            globalVar.username = username
             password = Entry2.get()
+            globalVar.password = password
             try:
                     globalVar.db1 = mysql.connector.connect(host="localhost", user=username, passwd=password, database="LIBRARY")
                     if globalVar.db1.is_connected():
                         m.destroy()
+                        globalVar.db1.close()
                         objd = dashboard
                         objd.dashboard.ui(dashboard)
             except :

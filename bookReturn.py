@@ -1,6 +1,7 @@
 import tkinter as tk
 import globalVar
 import datetime
+import mysql.connector
 class bookreturn :
     lable = []
     def onclick( self, Entry1, br, lable3, row1, column1):
@@ -17,11 +18,13 @@ class bookreturn :
                 lable3.configure(text="Invalid ID")
         else :
             idNo=Entry1.get()
+            globalVar.db1 = mysql.connector.connect(host="localhost", user=globalVar.username,passwd=globalVar.password, database="LIBRARY")
             sql="SELECT * FROM issue WHERE idNo=%s"
             val=(idNo,)
             c = globalVar.db1.cursor()
             c.execute(sql, val)
             res = c.fetchall()
+            globalVar.db1.close()
             if len(res)!=0:
                 ++column1
                 for i in res :
@@ -67,21 +70,26 @@ class bookreturn :
                 lable3.configure(text="INVALID BOOK ID")
     def onclick2( self, br, bookId, i):
         try:
+            globalVar.db1 = mysql.connector.connect(host="localhost", user=globalVar.username,passwd=globalVar.password, database="LIBRARY")
             sql = "DELETE FROM `issue` WHERE `issue`.`idNo` = %s AND `issue`.`bookId` = %s"
             c = globalVar.db1.cursor()
             studId=int(i[0])
             c.execute(sql, (studId,bookId,))
             globalVar.db1.commit()
+            globalVar.db1.close()
+            globalVar.db1 = mysql.connector.connect(host="localhost", user=globalVar.username,passwd=globalVar.password, database="LIBRARY")
             c = globalVar.db1.cursor()
             sql = "SELECT Quantity FROM books WHERE books.bookId = %s"
             c.execute(sql, (bookId,))
             res=c.fetchone()
             quant=int(res[0])+1
-            print(quant)
+            globalVar.db1.close()
+            globalVar.db1 = mysql.connector.connect(host="localhost", user=globalVar.username,passwd=globalVar.password, database="LIBRARY")
             c = globalVar.db1.cursor()
             sql = "UPDATE books SET books.Quantity = %s WHERE books.bookId = %s"
             c.execute(sql, (quant,bookId,))
             globalVar.db1.commit()
+            globalVar.db1.close()
             br.destroy()
         except:
             print("Error in deleting")
